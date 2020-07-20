@@ -61,12 +61,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api.cs" />
+    <Compile Include="Calc.cs" />
+    <Compile Include="Character.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Search.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="Market.cs" />
     <Compile Include="Prices.cs" />
