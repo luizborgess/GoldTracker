@@ -10,9 +10,12 @@ namespace GoldTracker
         public List<long> count_vendor { get; set; }
         public List<long> vault_items { get; set; }
         public List<long> vault_count { get; set; }
+        public List<long> junk { get; set; }
+        public List<long> junk_count { get; set; }
 
         public Items items;
         public Vault[] vault;
+        public Vendor[] vendor_value;
 
         public SearchInventory Inventory()
         {
@@ -36,7 +39,7 @@ namespace GoldTracker
                             count_tp.Add(inv.Count);
                         }
                         //vendor items
-                        if (inv.Binding == "Account" && inv.Id != null)
+                        if (inv.Binding == "Character" && inv.Id != null)
                         {
                             vendor.Add(inv.Id);
                             count_vendor.Add(inv.Count);
@@ -61,6 +64,21 @@ namespace GoldTracker
                 }
             }
             return new SearchInventory { vault_items = vault_items, vault_count = vault_count };
+        }
+
+        public SearchInventory Vendor()
+        {
+            List<long> junk = new List<long>();
+            List<long> junk_count = new List<long>();
+            foreach (Vendor item in vendor_value)
+            {
+                if (item.Rarity == "Junk")
+                {
+                    junk.Add(item.VendorValue);
+                    junk_count.Add(item.Id);
+                }
+            }
+            return new SearchInventory { junk = junk, junk_count = junk_count };
         }
     }
 }

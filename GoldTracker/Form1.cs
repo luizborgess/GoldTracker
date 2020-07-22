@@ -83,10 +83,29 @@ namespace GoldTracker
             var vault = Vault.FromJson(vault_value);
             search.vault = vault;
 
+            //String.Join(",", lst)
+            //vendor search
+            //var stringue = string.Join(",", search.vendor);
+            if (search.vendor != null)
+            {
+                HttpResponseMessage vendor_response = Api.ClientConfig(textBox1.Text).GetAsync("items?ids=" + string.Join(",", search.vendor)).Result;
+                string vendor_response_content = await vendor_response.Content.ReadAsStringAsync();
+                var vendor = Vendor.FromJson(vendor_response_content);
+                search.vendor_value = vendor;
+            }
+
             //Calculate value
             Calc calc = new Calc();
             var vault_calc = calc.Vault(search, market_id, market_sell, market_buy);
             var inv_calc = calc.Inventory(search, market_id, market_sell, market_buy);
+            if (search.vendor != null)
+            {
+                var junk = calc.Vendor(search);
+            }
+            else
+            {
+                calc.junk_value = 0;
+            }
 
             //display value
             int[] value = Monetary(vault_calc.vault_sell);
@@ -127,6 +146,11 @@ namespace GoldTracker
         private void button5_Click(object sender, EventArgs e)//stopwatch reset
         {
             stopwatch.Reset();
+        }
+
+        private void label24_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button7_Click(object sender, EventArgs e)//Update Database

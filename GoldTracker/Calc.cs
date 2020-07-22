@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace GoldTracker
 {
@@ -8,6 +9,7 @@ namespace GoldTracker
         public long vault_buy { get; set; }
         public long inv_sell { get; set; }
         public long inv_buy { get; set; }
+        public long junk_value { get; set; }
 
         public Calc Vault(SearchInventory search, List<long> market_id, List<long> market_sell, List<long> market_buy)
         {
@@ -51,6 +53,17 @@ namespace GoldTracker
                 j++;
             }
             return new Calc { inv_sell = tp_sell, inv_buy = tp_buy };
+        }
+        public Calc Vendor(SearchInventory search)
+        {
+            long junk = 0;
+            int i = 0;
+            foreach (var item in search.junk)
+            {
+                junk = item * search.junk_count[i];
+                i++;
+            }
+            return new Calc { junk_value = junk };
         }
     }
 }

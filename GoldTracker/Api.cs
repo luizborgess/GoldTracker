@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Windows.Forms;
 
 namespace GoldTracker
 {
@@ -15,6 +14,5 @@ namespace GoldTracker
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", key);
             return client;
         }
-
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GoldTracker
+﻿namespace GoldTracker
 {
     public class Market
     {
